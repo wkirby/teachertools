@@ -1,50 +1,13 @@
 <?php
 
+namespace Apsis;
+
+use Symfony\Component\Yaml\Yaml;
+
 require_once('vendor/autoload.php');
 require_once('lib/worksheet_generator.cls.php');
-
-define('NUM_PROBLEMS', 8);
-
-// Dolch Site Nouns. Must be something that can be "taken" or "given".
-// Must be pluralized, or weird sentences might be constructed.
-$sight_words = array(
-  "apples",
-  "balls",
-  "bears",
-  "beds",
-  "bells",
-  "birds",
-  "boats",
-  "boxes",
-  "cars",
-  "cats",
-  "chairs",
-  "chickens",
-  "coats",
-  "cows",
-  "dogs",
-  "dolls",
-  "ducks",
-  "eggs",
-  "fish",
-  "flowers",
-  "games",
-  "horses",
-  "kittens",
-  "letters",
-  "nests",
-  "pigs",
-  "rabbits",
-  "rings",
-  "seeds",
-  "sheep",
-  "shoes",
-  "sticks",
-  "tables",
-  "toys",
-  "trees",
-  "watches"
-);
+require_once('lib/problem_generator.cls.php');
+require_once('lib/addition_problem_generator.cls.php');
 
 // Matches pattern of "x {{child}} in {{parent}}" or
 // "{{parent}} has x {{child}}"
@@ -63,22 +26,14 @@ $noun_pairs = array(
   array("parent" => "field", "child" => "cows"),
 );
 
-$subjects = array(
-  array("subj" => "my uncle",   "obj" => "he",  "possessive" => "his", "pronoun" => "him"),
-  array("subj" => "my aunt",    "obj" => "she", "possessive" => "her", "pronoun" => "her"),
-  array("subj" => "my dad",     "obj" => "he",  "possessive" => "his", "pronoun" => "him"),
-  array("subj" => "my mom",     "obj" => "she", "possessive" => "her", "pronoun" => "her"),
-  array("subj" => "my brother", "obj" => "he",  "possessive" => "his", "pronoun" => "him"),
-  array("subj" => "my sister",  "obj" => "she", "possessive" => "her", "pronoun" => "her"),
-  array("subj" => "my friend",  "obj" => "he",  "possessive" => "his", "pronoun" => "him"),
-  array("subj" => "my friend",  "obj" => "she", "possessive" => "her", "pronoun" => "her")
-);
+$subjects = Yaml::parse(file_get_contents(dirname(__FILE__) . "/config/subjects.yml"));
+$objects = Yaml::parse(file_get_contents(dirname(__FILE__) . "/config/objects.yml"));
 
 $addition_templates = array(
   "I have {{num_1}} {{object}}. {{subject}} has {{num_2}} {{object}}. How many {{object}} do we have all together?",
   "I have {{num_2}} {{object}}. {{subject}} has {{num_1}} {{object}}. How many {{object}} do we have all together?",
-  "{{subject}} has {{num_2}} {{object}}. I give {{subj_pro}} {{num_1}} {{object}}. How many more does {{subj_obj}} have now?",
-  "{{subject}} has {{num_1}} {{object}}. I give {{subj_pro}} {{num_2}} {{object}}. How many more does {{subj_obj}} have now?"
+  "{{subject}} has {{num_2}} {{object}}. I give {{subject_pronoun}} {{num_1}} {{object}}. How many does {{subject_object}} have now?",
+  "{{subject}} has {{num_1}} {{object}}. I give {{subject_pronoun}} {{num_2}} {{object}}. How many does {{subject_object}} have now?"
 );
 
 $subtraction_templates = array(
@@ -95,42 +50,14 @@ $multiplication_templates = array(
   "I have {{num_2}} {{object_1}}. Each {{object_1}} has {{num_1}} {{object_2}}. How many {{object_2}} are there in total?",
 );
 
+$generator = new AdditionProblemGenerator($addition_templates);
 
-$problems = array();
+$generator
+  ->setRanges(1, 100, 1, 999)
+  ->setObjects($objects)
+  ->setSubjects($subjects);
 
-for ($i=1; $i <= NUM_PROBLEMS; $i++) {
-  $tpl = $addition_templates[array_rand($addition_templates, 1)];
-  $obj_accessor =  array_rand($sight_words, 1);
-  $subj_accessor =  array_rand($subjects, 1);
-  $subj = $subjects[$subj_accessor];
+$problems = $generator->generate(5);
 
-  $vars = array(
-    'num_1' => rand(100, 999),
-    'num_2' => rand(1, 99),
-    'object' => $sight_words[$obj_accessor],
-    'subject' => $subj["subj"],
-    'subj_pro' => $subj["pronoun"],
-    'subj_obj' => $subj["obj"],
-    'subj_pro' => $subj["possessive"],
-  );
-
-  $problems[] = "$i. " . template($tpl, $vars);
-}
-
-$worksheet_generator = new \Apsis\WorksheetGenerator($problems);
+$worksheet_generator = new WorksheetGenerator($problems);
 $worksheet_generator->render();
-
-function template($str, $vars)
-{
-    foreach ($vars as $k => $v) {
-        $str = str_replace("{{" . $k . "}}", $v, $str);
-    }
-
-    return upperFirstWord($str);
-}
-
-function upperFirstWord($str)
-{
-    $str = preg_replace_callback('/[.!?].*?\w/', create_function('$matches', 'return strtoupper($matches[0]);'), $str);
-    return ucfirst($str);
-}

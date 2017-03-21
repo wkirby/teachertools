@@ -1,0 +1,43 @@
+# Male Subjects
+- subject: my uncle
+  pronouns:
+    subjective: he
+    objective: him
+    possessive: his
+- subject: my dad
+  pronouns:
+    subjective: he
+    objective: him
+    possessive: his
+- subject: my brother
+  pronouns:
+    subjective: he
+    objective: him
+    possessive: his
+- subject: my friend
+  pronouns:
+    subjective: he
+    objective: him
+    possessive: his
+
+# Female Subjects
+- subject: my aunt
+  pronouns:
+    subjective: she
+    objective: her
+    possessive: hers
+- subject: my mom
+  pronouns:
+    subjective: she
+    objective: her
+    possessive: hers
+- subject: my sister
+  pronouns:
+    subjective: she
+    objective: her
+    possessive: hers
+- subject: my friend
+  pronouns:
+    subjective: she
+    objective: her
+    possessive: hers
