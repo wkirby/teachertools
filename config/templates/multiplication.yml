@@ -1,0 +1,2 @@
+- "There are {{num_1}} {{object_1}}. There are {{num_2}} {{object_2}} in each {{object_1}}. How many {{object_2}} are there all together?"
+- "I have {{num_1}} {{object_1}}. Each {{object_1}} has {{num_2}} {{object_2}}. How many {{object_2}} are there in total?"

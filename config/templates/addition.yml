@@ -1,0 +1,2 @@
+- "I have {{num_1}} {{object}}. {{subject}} has {{num_2}} {{object}}. How many {{object}} do we have all together?"
+- "{{subject}} has {{num_2}} {{object}}. I give {{subject_objective}} {{num_1}} {{object}}. How many does {{subject_subjective}} have now?"
