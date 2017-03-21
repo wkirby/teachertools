@@ -1,2 +1,7 @@
-- "I have {{num_1}} {{object}}. {{subject}} has {{num_2}} {{object}}. How many {{object}} do we have all together?"
-- "{{subject}} has {{num_2}} {{object}}. I give {{subject_objective}} {{num_1}} {{object}}. How many does {{subject_subjective}} have now?"
+# augend: The number being added to.
+# addend: The number being added.
+#
+# augend + addend = sum
+
+- "I have {{augend}} {{object}}. {{subject}} has {{addend}} {{object}}. How many {{object}} do we have all together?"
+- "{{subject}} has {{addend}} {{object}}. I give {{subject_objective}} {{augend}} {{object}}. How many does {{subject_subjective}} have now?"

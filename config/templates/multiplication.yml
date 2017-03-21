@@ -1,2 +1,7 @@
-- "There are {{num_1}} {{parent_plural}}. There are {{num_2}} {{child_plural}} in each {{parent_singular}}. How many {{child_plural}} are there all together?"
-- "I have {{num_1}} {{parent_plural}}. Each {{parent_singular}} has {{num_2}} {{child_plural}}. How many {{child_plural}} are there in total?"
+# multiplicand: The number being multiplied
+# multiplier: The number to multiply by
+#
+# multiplicand × multiplier = product
+
+- "There are {{multiplicand}} {{parent_plural}}. There are {{multiplier}} {{child_plural}} in each {{parent_singular}}. How many {{child_plural}} are there all together?"
+- "I have {{multiplicand}} {{parent_plural}}. Each {{parent_singular}} has {{multiplier}} {{child_plural}}. How many {{child_plural}} are there in total?"

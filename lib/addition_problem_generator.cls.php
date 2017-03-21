@@ -7,8 +7,8 @@ class AdditionProblemGenerator extends ProblemGenerator
   protected $objects;
   protected $subjects;
 
-  protected $digitsA;
-  protected $digitsB;
+  protected $augendDigits;
+  protected $addendDigits;
 
   public function setObjects($objects)
   {
@@ -22,11 +22,15 @@ class AdditionProblemGenerator extends ProblemGenerator
     return $this;
   }
 
-  public function setDigits($a, $b)
+  public function setAugendDigits($n)
   {
-    $this->digitsA = $a;
-    $this->digitsB = $b;
+    $this->augendDigits = $n;
+    return $this;
+  }
 
+  public function setAddendDigits($n)
+  {
+    $this->addendDigits = $n;
     return $this;
   }
 
@@ -36,9 +40,9 @@ class AdditionProblemGenerator extends ProblemGenerator
     $object = $this->objects[array_rand($this->objects)];;
 
     return array(
-      'num_1'    => $this->randomDigits($this->digitsA),
-      'num_2'    => $this->randomDigits($this->digitsB),
-      'object'   => $object,
+      'augend' => $this->randomDigits($this->augendDigits),
+      'addend' => $this->randomDigits($this->addendDigits),
+      'object' => $object,
 
       'subject'            => $subject["subject"],
       'subject_subjective' => $subject["pronouns"]["subjective"],

@@ -6,8 +6,8 @@ class MultiplicationProblemGenerator extends ProblemGenerator
 {
   protected $pairs;
 
-  protected $digitsA;
-  protected $digitsB;
+  protected $multiplierDigits;
+  protected $multiplicandDigits;
 
   public function setPairs($pairs)
   {
@@ -15,11 +15,15 @@ class MultiplicationProblemGenerator extends ProblemGenerator
     return $this;
   }
 
-  public function setDigits($a, $b)
+  public function setMultiplierDigits($n)
   {
-    $this->digitsA = $a;
-    $this->digitsB = $b;
+    $this->multiplierDigits = $n;
+    return $this;
+  }
 
+  public function setMultiplicandDigits($n)
+  {
+    $this->multiplicandDigits = $n;
     return $this;
   }
 
@@ -28,8 +32,8 @@ class MultiplicationProblemGenerator extends ProblemGenerator
     $pairs = $this->pairs[array_rand($this->pairs)];
 
     return array(
-      'num_1'  => $this->randomDigits($this->digitsA),
-      'num_2'  => $this->randomDigits($this->digitsB),
+      'multiplier'  => $this->randomDigits($this->multiplierDigits),
+      'multiplicand'  => $this->randomDigits($this->multiplicandDigits),
       'parent_singular' => $pairs["parent"]["singular"],
       'parent_plural'   => $pairs["parent"]["plural"],
       'child_singular'  => $pairs["child"]["singular"],

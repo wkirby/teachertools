@@ -1,2 +1,7 @@
-- "{{subject}} has {{num_2}} {{object}}. If {{subject_subjective}} gives me {{num_1}} {{object}}, how many {{object}} does {{subject_subjective}} have left?"
-- "I have {{num_2}} {{object}}. {{subject}} takes {{num_1}} {{object}}. How many {{object}} do I have left?"
+# minuend: The number subtracted from
+# subtrahend: The number being subtracted
+#
+# minuend - subtrahend = difference
+
+- "{{subject}} has {{minuend}} {{object}}. If {{subject_subjective}} gives me {{subtrahend}} {{object}}, how many {{object}} does {{subject_subjective}} have left?"
+- "I have {{minuend}} {{object}}. {{subject}} takes {{subtrahend}} {{object}}. How many {{object}} do I have left?"

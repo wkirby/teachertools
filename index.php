@@ -8,6 +8,7 @@ require_once('vendor/autoload.php');
 require_once('lib/worksheet_generator.cls.php');
 require_once('lib/problem_generator.cls.php');
 require_once('lib/addition_problem_generator.cls.php');
+require_once('lib/subtraction_problem_generator.cls.php');
 require_once('lib/multiplication_problem_generator.cls.php');
 
 // Fixtures
@@ -22,21 +23,24 @@ $mulTemplates = Yaml::parse(file_get_contents(dirname(__FILE__) . "/config/templ
 
 // Generators
 $additionGenerator = new AdditionProblemGenerator($addTemplates);
-$subtractionGenerator = new AdditionProblemGenerator($subTemplates);
+$subtractionGenerator = new SubtractionProblemGenerator($subTemplates);
 $multiplicationGenerator = new MultiplicationProblemGenerator($mulTemplates);
 
 $additionGenerator
-  ->setDigits(2, 3)
+  ->setAddendDigits(2)
+  ->setAugendDigits(3)
   ->setObjects($objects)
   ->setSubjects($subjects);
 
 $subtractionGenerator
-  ->setDigits(2, 3)
+  ->setMinuendDigits(3)
+  ->setSubtrahendDigits(2)
   ->setObjects($objects)
   ->setSubjects($subjects);
 
 $multiplicationGenerator
-  ->setDigits(2, 3)
+  ->setMultiplicandDigits(3)
+  ->setMultiplierDigits(2)
   ->setPairs($pairs);
 
 $problems = $multiplicationGenerator->generate(5);
