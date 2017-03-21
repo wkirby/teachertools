@@ -7,13 +7,13 @@ abstract class ProblemGenerator
     private $templates;
     abstract public function generateTemplateVars();
 
-    public function __construct(array $templates = array())
+    public function __construct($templates = array())
     {
         $this->templates = $templates;
         return $this;
     }
 
-    public function generate(int $numberOfProblems)
+    public function generate($numberOfProblems)
     {
         $problems = array();
 

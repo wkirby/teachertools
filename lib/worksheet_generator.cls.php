@@ -8,7 +8,7 @@ use \PhpOffice\PhpWord\IOFactory;
 
 class WorksheetGenerator
 {
-  public function __construct(string $name, Array $problems)
+  public function __construct($name, $problems)
   {
     $this->name = $name;
     $this->problems = $problems;

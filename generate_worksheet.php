@@ -23,20 +23,20 @@ $problems = array();
 foreach ($problemSets as $set) {
   switch ($set["type"]) {
     case 'addition':
-      $generator = $additionGenerator->setAddendDigits($set["oper_1_digits"])->setAugendDigits($set["oper_2_digits"]);
+      $generator = $additionGenerator->setAddendDigits(intval($set["oper_1_digits"]))->setAugendDigits(intval($set["oper_2_digits"]));
       break;
     case 'subtraction':
-      $generator = $subtractionGenerator->setMinuendDigits($set["oper_1_digits"])->setSubtrahendDigits($set["oper_2_digits"]);
+      $generator = $subtractionGenerator->setMinuendDigits(intval($set["oper_1_digits"]))->setSubtrahendDigits(intval($set["oper_2_digits"]));
       break;
     case 'multiplication':
-      $generator = $multiplicationGenerator->setMultiplierDigits($set["oper_1_digits"])->setMultiplicandDigits($set["oper_2_digits"]);
+      $generator = $multiplicationGenerator->setMultiplierDigits(intval($set["oper_1_digits"]))->setMultiplicandDigits(intval($set["oper_2_digits"]));
       break;
     default:
       continue 2; // If it's unhandled, then we should continue to the next set
       break;
   }
 
-  $problems = array_merge($problems, $generator->generate($set["num_problems"]));
+  $problems = array_merge($problems, $generator->generate(intval($set["num_problems"])));
 }
 
 // Randomize if requested
