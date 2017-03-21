@@ -2,16 +2,19 @@
 
 namespace Apsis;
 
+use \Slug\Slugifier;
 use \PhpOffice\PhpWord\PhpWord;
 use \PhpOffice\PhpWord\IOFactory;
 
 class WorksheetGenerator
 {
-  public function __construct(Array $problems)
+  public function __construct(string $name, Array $problems)
   {
+    $this->name = $name;
     $this->problems = $problems;
     $this->phpWord  = new PhpWord();
     $this->section  = $this->phpWord->addSection();
+    $this->slugifier = new Slugifier();
 
     $this->bodyFontStyle  = 'comic_sans_body';;
     $this->titleFontStyle = 'comic_sans_title';
@@ -22,12 +25,12 @@ class WorksheetGenerator
     $this->phpWord->addFontStyle($this->titleFontStyle, array('name' => 'Comic Sans MS', 'size' => 16, 'color' => '#000000', 'bold' => true));
   }
 
-  public function render()
+  public function save()
   {
     // Format Header
     $this->section->addText("Name: __________         Date: __________", $this->nameFontStyle);
     $this->section->addTextBreak(2);
-    $this->section->addText("Page Header", $this->titleFontStyle);
+    $this->section->addText($this->name, $this->titleFontStyle);
     $this->section->addTextBreak(2);
 
     // Output Problems
@@ -39,8 +42,13 @@ class WorksheetGenerator
     }
 
     // Write File
-    $timestamp = time();
+    $timestamp = date('Ymdhis', time());
+    $filename = $this->slugifier->slugify($this->name);
+
+    $this->filename = "$timestamp-{$filename}.rtf";
+    $this->tempfile = tempnam(sys_get_temp_dir(), 'phpword');
+
     $objWriter = IOFactory::createWriter($this->phpWord, 'RTF');
-    $objWriter->save("output/output-$timestamp.rtf");
+    $objWriter->save($this->tempfile);
   }
 }
