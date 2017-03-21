@@ -3,5 +3,5 @@
 #
 # augend + addend = sum
 
-- "{{student}} has {{augend}} {{object}}. {{student_possessive}} {{subject}} has {{addend}} {{object}}. How many {{object}} do we have all together?"
+- "{{student}} has {{augend}} {{object}}. {{student_possessive}} {{subject}} has {{addend}} {{object}}. How many {{object}} do they have all together?"
 - "{{student_possessive}} {{subject}} has {{addend}} {{object}}. {{student}} gives {{subject_objective}} {{augend}} {{object}}. How many does {{subject_subjective}} have now?"
