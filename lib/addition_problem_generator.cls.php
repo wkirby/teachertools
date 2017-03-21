@@ -7,10 +7,8 @@ class AdditionProblemGenerator extends ProblemGenerator
   protected $objects;
   protected $subjects;
 
-  protected $numOneMin;
-  protected $numOneMax;
-  protected $numTwoMin;
-  protected $numTwoMax;
+  protected $digitsA;
+  protected $digitsB;
 
   public function setObjects($objects)
   {
@@ -24,12 +22,10 @@ class AdditionProblemGenerator extends ProblemGenerator
     return $this;
   }
 
-  public function setRanges($a, $b, $c, $d)
+  public function setDigits($a, $b)
   {
-    $this->numOneMin = $a;
-    $this->numOneMax = $b;
-    $this->numTwoMin = $c;
-    $this->numTwoMax = $d;
+    $this->digitsA = $a;
+    $this->digitsB = $b;
 
     return $this;
   }
@@ -40,13 +36,13 @@ class AdditionProblemGenerator extends ProblemGenerator
     $object = $this->objects[array_rand($this->objects)];;
 
     return array(
-      'num_1'    => rand($this->numOneMin, $this->numOneMax),
-      'num_2'    => rand($this->numTwoMin, $this->numTwoMax),
+      'num_1'    => $this->randomDigits($this->digitsA),
+      'num_2'    => $this->randomDigits($this->digitsB),
       'object'   => $object,
 
       'subject'            => $subject["subject"],
-      'subject_pronoun'    => $subject["pronouns"]["subjective"],
-      'subject_object'     => $subject["pronouns"]["objective"],
+      'subject_subjective' => $subject["pronouns"]["subjective"],
+      'subject_objective'  => $subject["pronouns"]["objective"],
       'subject_possessive' => $subject["pronouns"]["possessive"]
     );
   }
