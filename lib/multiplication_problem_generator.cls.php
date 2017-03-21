@@ -4,21 +4,14 @@ namespace Apsis;
 
 class MultiplicationProblemGenerator extends ProblemGenerator
 {
-  protected $objects;
-  protected $subjects;
+  protected $pairs;
 
   protected $digitsA;
   protected $digitsB;
 
-  public function setObjects($objects)
+  public function setPairs($pairs)
   {
-    $this->objects = $objects;
-    return $this;
-  }
-
-  public function setSubjects($subjects)
-  {
-    $this->subjects = $subjects;
+    $this->pairs = $pairs;
     return $this;
   }
 
@@ -32,18 +25,15 @@ class MultiplicationProblemGenerator extends ProblemGenerator
 
   function generateTemplateVars()
   {
-    $subject = $this->subjects[array_rand($this->subjects)];
-    $object = $this->objects[array_rand($this->objects)];;
+    $pairs = $this->pairs[array_rand($this->pairs)];
 
     return array(
-      'num_1'    => $this->randomDigits($this->digitsA),
-      'num_2'    => $this->randomDigits($this->digitsB),
-      'object'   => $object,
-
-      'subject'            => $subject["subject"],
-      'subject_subjective' => $subject["pronouns"]["subjective"],
-      'subject_objective'  => $subject["pronouns"]["objective"],
-      'subject_possessive' => $subject["pronouns"]["possessive"]
+      'num_1'  => $this->randomDigits($this->digitsA),
+      'num_2'  => $this->randomDigits($this->digitsB),
+      'parent_singular' => $pairs["parent"]["singular"],
+      'parent_plural'   => $pairs["parent"]["plural"],
+      'child_singular'  => $pairs["child"]["singular"],
+      'child_plural'    => $pairs["child"]["plural"],
     );
   }
 }

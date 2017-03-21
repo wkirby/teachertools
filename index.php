@@ -13,6 +13,7 @@ require_once('lib/multiplication_problem_generator.cls.php');
 // Fixtures
 $subjects = Yaml::parse(file_get_contents(dirname(__FILE__) . "/config/subjects.yml"));
 $objects = Yaml::parse(file_get_contents(dirname(__FILE__) . "/config/objects.yml"));
+$pairs = Yaml::parse(file_get_contents(dirname(__FILE__) . "/config/noun_pairs.yml"));
 
 // Templates
 $addTemplates = Yaml::parse(file_get_contents(dirname(__FILE__) . "/config/templates/addition.yml"));
@@ -34,8 +35,13 @@ $subtractionGenerator
   ->setObjects($objects)
   ->setSubjects($subjects);
 
-$problems = $additionGenerator->generate(5);
-$problems = array_merge($subtractionGenerator->generate(5), $problems);
+$multiplicationGenerator
+  ->setDigits(2, 3)
+  ->setPairs($pairs);
+
+$problems = $multiplicationGenerator->generate(5);
+// $problems = array_merge($subtractionGenerator->generate(5), $problems);
+// $problems = array_merge($subtractionGenerator->generate(5), $problems);
 shuffle($problems);
 
 $worksheet_generator = new WorksheetGenerator($problems);

@@ -1,0 +1,36 @@
+- parent:
+    singular: field
+    plural: fields
+  child:
+    singular: cow
+    plural: cows
+- parent:
+    singular: box
+    plural: boxes
+  child:
+    singular: toy
+    plural: toys
+- parent:
+    singular: bag
+    plural: bags
+  child:
+    singular: coin
+    plural: coins
+- parent:
+    singular: car
+    plural: cars
+  child:
+    singular: person
+    plural: people
+- parent:
+    singular: truck
+    plural: trucks
+  child:
+    singular: person
+    plural: people
+- parent:
+    singular: house
+    plural: houses
+  child:
+    singular: child
+    plural: children

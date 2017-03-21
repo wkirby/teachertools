@@ -1,2 +1,2 @@
-- "There are {{num_1}} {{object_1}}. There are {{num_2}} {{object_2}} in each {{object_1}}. How many {{object_2}} are there all together?"
-- "I have {{num_1}} {{object_1}}. Each {{object_1}} has {{num_2}} {{object_2}}. How many {{object_2}} are there in total?"
+- "There are {{num_1}} {{parent_plural}}. There are {{num_2}} {{child_plural}} in each {{parent_singular}}. How many {{child_plural}} are there all together?"
+- "I have {{num_1}} {{parent_plural}}. Each {{parent_singular}} has {{num_2}} {{child_plural}}. How many {{child_plural}} are there in total?"
