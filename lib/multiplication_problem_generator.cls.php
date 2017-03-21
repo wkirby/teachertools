@@ -29,15 +29,17 @@ class MultiplicationProblemGenerator extends ProblemGenerator
 
   function generateTemplateVars()
   {
+    $templateVars = parent::generateTemplateVars();
     $pairs = $this->pairs[array_rand($this->pairs)];
 
-    return array(
-      'multiplier'  => $this->randomDigits($this->multiplierDigits),
+    return array_merge($templateVars, array(
+      'multiplier'    => $this->randomDigits($this->multiplierDigits),
       'multiplicand'  => $this->randomDigits($this->multiplicandDigits),
+      
       'parent_singular' => $pairs["parent"]["singular"],
       'parent_plural'   => $pairs["parent"]["plural"],
       'child_singular'  => $pairs["child"]["singular"],
       'child_plural'    => $pairs["child"]["plural"],
-    );
+    ));
   }
 }

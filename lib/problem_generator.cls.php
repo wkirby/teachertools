@@ -4,12 +4,21 @@ namespace Apsis;
 
 abstract class ProblemGenerator
 {
-    private $templates;
-    abstract public function generateTemplateVars();
+    protected $templates;
+    protected $pronouns;
+    protected $student;
+    protected $studentGender;
 
-    public function __construct($templates = array())
+    public function __construct($templates = array(), $pronouns = array())
     {
         $this->templates = $templates;
+        $this->pronouns = $pronouns;
+        return $this;
+    }
+
+    public function setStudent($student, $studentGender) {
+        $this->student = $student;
+        $this->studentGender = $studentGender;
         return $this;
     }
 
@@ -24,12 +33,12 @@ abstract class ProblemGenerator
         return $problems;
     }
 
-    public function randomTemplate()
+    protected function randomTemplate()
     {
         return $this->templates[array_rand($this->templates)];
     }
 
-    public function renderTemplate($str, $vars)
+    protected function renderTemplate($str, $vars)
     {
         foreach ($vars as $k => $v) {
             $str = str_replace("{{" . $k . "}}", $v, $str);
@@ -38,13 +47,21 @@ abstract class ProblemGenerator
         return $this->sentenceCase($str);
     }
 
-    public function sentenceCase($str)
+    protected function generateTemplateVars()
+    {
+        return array(
+          'student'            => $this->student,
+          'student_possessive' => "$this->student's",
+        );
+    }
+
+    protected function sentenceCase($str)
     {
         $str = preg_replace_callback('/[.!?].*?\w/', create_function('$matches', 'return strtoupper($matches[0]);'), $str);
         return ucfirst($str);
     }
 
-    public function randomDigits($digits)
+    protected function randomDigits($digits)
     {
         return rand(pow(10, $digits-1), pow(10, $digits)-1);
     }

@@ -19,6 +19,7 @@ require_once($basedir . '/lib/multiplication_problem_generator.cls.php');
 $subjects = Yaml::parse(file_get_contents($basedir . "/config/subjects.yml"));
 $objects = Yaml::parse(file_get_contents($basedir . "/config/objects.yml"));
 $pairs = Yaml::parse(file_get_contents($basedir . "/config/noun_pairs.yml"));
+$pronouns = Yaml::parse(file_get_contents($basedir . "/config/pronouns.yml"));
 
 // Templates
 $addTemplates = Yaml::parse(file_get_contents($basedir . "/config/templates/addition.yml"));

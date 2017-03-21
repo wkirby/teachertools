@@ -3,5 +3,5 @@
 #
 # minuend - subtrahend = difference
 
-- "{{subject}} has {{minuend}} {{object}}. If {{subject_subjective}} gives me {{subtrahend}} {{object}}, how many {{object}} does {{subject_subjective}} have left?"
-- "I have {{minuend}} {{object}}. {{subject}} takes {{subtrahend}} {{object}}. How many {{object}} do I have left?"
+- "{{student_possessive}} {{subject}} has {{minuend}} {{object}}. If {{subject_subjective}} gives {{student}} {{subtrahend}} {{object}}, how many {{object}} does {{subject_subjective}} have left?"
+- "{{student}} has {{minuend}} {{object}}. {{student_possessive}} {{subject}} takes {{subtrahend}} {{object}}. How many {{object}} does {{student}} have left?"

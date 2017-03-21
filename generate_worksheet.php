@@ -6,18 +6,54 @@ use Symfony\Component\HttpFoundation\Request;
 
 require_once('lib/bootstrap.php');
 
-$request = Request::createFromGlobals();
-$problemSets = $request->request->get('problem_set');
+$request = Request::createFromGlobals()->request;
 
+// ==============================================
+// Handle Request
+// ==============================================
+
+// Request Vars
+$problemSets   = $request->get('problem_set');
+$student       = $request->get('subject_name');
+$studentGender = $request->get('student_gender');
+
+// Bail Early
+if ( empty($problemSets) ) {
+  header("HTTP/1.0 400 Bad Request");
+  exit();
+}
+
+// Set defaults
+$student = empty($student) ? "the student" : $student;
+$studentGender = empty($studentGender) ? "neutral" : $studentGender;
+
+// ==============================================
 // Generators
-$additionGenerator = new AdditionProblemGenerator($addTemplates);
-$subtractionGenerator = new SubtractionProblemGenerator($subTemplates);
-$multiplicationGenerator = new MultiplicationProblemGenerator($mulTemplates);
+// ==============================================
+$additionGenerator = new AdditionProblemGenerator($addTemplates, $pronouns);
+$subtractionGenerator = new SubtractionProblemGenerator($subTemplates, $pronouns);
+$multiplicationGenerator = new MultiplicationProblemGenerator($mulTemplates, $pronouns);
 
-$additionGenerator->setObjects($objects)->setSubjects($subjects);
-$subtractionGenerator->setObjects($objects)->setSubjects($subjects);
-$multiplicationGenerator->setPairs($pairs);
+// Set all data
+$additionGenerator
+  ->setStudent($student, $studentGender)
+  ->setObjects($objects)
+  ->setSubjects($subjects);
 
+$subtractionGenerator
+  ->setStudent($student, $studentGender)
+  ->setObjects($objects)
+  ->setSubjects($subjects);
+
+$multiplicationGenerator
+  ->setStudent($student, $studentGender)
+  ->setPairs($pairs);
+
+// ==============================================
+// Generate Sheet
+// ==============================================
+
+// Create Problems
 $problems = array();
 
 foreach ($problemSets as $set) {
@@ -40,9 +76,13 @@ foreach ($problemSets as $set) {
 }
 
 // Randomize if requested
-if ($request->request->get('randomize')) { shuffle($problems); }
+if ($request->get('randomize')) { shuffle($problems); }
 
-$worksheet_generator = new WorksheetGenerator($request->request->get('worksheet_title'), $problems);
+// ==============================================
+// Send Response
+// ==============================================
+
+$worksheet_generator = new WorksheetGenerator($request->get('worksheet_title'), $problems);
 $worksheet_generator->save();
 
 // Send file to the browser

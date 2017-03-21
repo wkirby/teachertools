@@ -4,4 +4,4 @@
 # multiplicand × multiplier = product
 
 - "There are {{multiplicand}} {{parent_plural}}. There are {{multiplier}} {{child_plural}} in each {{parent_singular}}. How many {{child_plural}} are there all together?"
-- "I have {{multiplicand}} {{parent_plural}}. Each {{parent_singular}} has {{multiplier}} {{child_plural}}. How many {{child_plural}} are there in total?"
+- "{{student}} has {{multiplicand}} {{parent_plural}}. Each {{parent_singular}} has {{multiplier}} {{child_plural}}. How many {{child_plural}} are there in total?"

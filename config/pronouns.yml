@@ -1,0 +1,12 @@
+male:
+  possessive: his
+  subjective: he
+  objective: him
+female:
+  possessive: hers
+  subjective: she
+  objective: her
+neutral:
+  possessive: theirs
+  subjective: they
+  objective: their

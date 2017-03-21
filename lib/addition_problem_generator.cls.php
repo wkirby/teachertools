@@ -36,18 +36,21 @@ class AdditionProblemGenerator extends ProblemGenerator
 
   function generateTemplateVars()
   {
-    $subject = $this->subjects[array_rand($this->subjects)];
-    $object = $this->objects[array_rand($this->objects)];;
+    $templateVars = parent::generateTemplateVars();
 
-    return array(
+    $subject  = $this->subjects[array_rand($this->subjects)];;
+    $object   = $this->objects[array_rand($this->objects)];;
+    $pronouns = $this->pronouns[$subject["pronouns"]];
+
+    return array_merge($templateVars, array(
       'augend' => $this->randomDigits($this->augendDigits),
       'addend' => $this->randomDigits($this->addendDigits),
-      'object' => $object,
+      'object'     => $object,
 
       'subject'            => $subject["subject"],
-      'subject_subjective' => $subject["pronouns"]["subjective"],
-      'subject_objective'  => $subject["pronouns"]["objective"],
-      'subject_possessive' => $subject["pronouns"]["possessive"]
-    );
+      'subject_subjective' => $pronouns["subjective"],
+      'subject_objective'  => $pronouns["objective"],
+      'subject_possessive' => $pronouns["possessive"]
+    ));
   }
 }

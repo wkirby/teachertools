@@ -12,7 +12,7 @@
       <form action="generate_worksheet.php" method="post">
         <div class="form-group">
           <label for="worksheet_title">Worksheet Title</label>
-          <input class="form-control" type="text" id="worksheet_title" name="worksheet_title" required>
+          <input class="form-control" type="text" id="worksheet_title" name="worksheet_title" value="Worksheet <?php echo date('m/d/Y', time()); ?>" required>
         </div>
 
         <div class="checkbox">
@@ -22,8 +22,32 @@
         </div>
 
         <hr>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="subject_name">Student Name</label>
+              <input class="form-control" type="text" id="subject_name" name="subject_name" value="The Student" required>
+              <p class="help-block">Customize the word problems to use a student's name.</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="subject_gender">Student Gender</label>
+              <select class="form-control" name="subject_gender" id="subject_gender">
+                <option value="neutral">Neutral</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <hr>
+
         <div id="problem_set_container"></div>
         <button id="add_problem_set" class="btn btn-default">Add Problem Set</button>
+
         <hr>
 
         <input class="btn btn-primary" type="submit" value="Generate">
